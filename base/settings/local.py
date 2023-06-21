@@ -12,7 +12,7 @@ INSTALLED_APPS = [ # Aplicaciones instaladas. Y tambien paquetes.
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #Local Apps
-    'applications.empleado', #En django, las rutas son con . y no con /
+    'applications.empleados', #En django, las rutas son con . y no con /
     'applications.departamento',
 ]
 
