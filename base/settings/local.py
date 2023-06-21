@@ -14,6 +14,7 @@ INSTALLED_APPS = [ # Aplicaciones instaladas. Y tambien paquetes.
     #Local Apps
     'applications.empleados', #En django, las rutas son con . y no con /
     'applications.departamento',
+    'applications.home',
 ]
 
 DATABASES = {
