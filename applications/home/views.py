@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
 from applications.home.models import Prueba
+from applications.departamento.models import Departamento
 
 
 # Create your views here.
