@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AddField(
-            model_name='empleado',
+            model_name='empleados',
             name='habilidades',
             field=models.ManyToManyField(to='empleados.habilidades'),
         ),

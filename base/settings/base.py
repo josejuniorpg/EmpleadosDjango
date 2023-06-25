@@ -24,6 +24,10 @@ INSTALLED_APPS = [ # Aplicaciones instaladas. Oh paquetes.
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Local Apps
+    'applications.empleados',  # En django, las rutas son con . y no con /
+    'applications.departamento',
+    'applications.home',
     #Third Apps
     'ckeditor',
 

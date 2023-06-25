@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='empleado',
+            model_name='empleados',
             name='hoja_vida',
             field=ckeditor.fields.RichTextField(default='Texto'),
             preserve_default=False,

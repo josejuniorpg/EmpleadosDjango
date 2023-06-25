@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='empleado',
+            name='empleados',
             options={'ordering': ['first_name'], 'verbose_name': 'Mi Empleado', 'verbose_name_plural': 'Mis Empleados'},
         ),
         migrations.AlterUniqueTogether(
-            name='empleado',
+            name='empleados',
             unique_together={('first_name', 'departamento')},
         ),
     ]
