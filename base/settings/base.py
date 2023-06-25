@@ -24,6 +24,9 @@ INSTALLED_APPS = [ # Aplicaciones instaladas. Oh paquetes.
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Third Apps
+    'ckeditor',
+
 ]
 
 MIDDLEWARE = [
