@@ -6,7 +6,11 @@
 </head>
 <body>
 <h1>Lista de Todos los empleados</h1>
-{{ object_list }}
+<form method="get">
+    <label for="page">Pagina </label>
+    <input type="text" name="page" id="page">
+    <input type="submit" value="Buscar">
+</form>
 
 <ul>
     {% for empleado in object_list %}

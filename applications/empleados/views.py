@@ -7,8 +7,8 @@ from .models import Empleado
 
 class ListAllEmpleados(ListView):
     template_name = 'empleados/list_all.html'
-    # paginate_by = 4
-    # ordering = 'first_name'
+    paginate_by = 1 #Solo mostrara 4 regitros
+    # ordering = 'first_name' #Ordena por nombre alfabeticamnete
     #context_object_name = 'empleados' #Lo comento porque uso el Objetc_list directamente
     # model = Empleado
     queryset = Empleado.objects.filter(
@@ -42,5 +42,15 @@ class ListEmpleadosByKword(ListView):
         )
         #print('lista: ', lista)
         return lista
+
+
+class ListHabilidadesEmpleado(ListView):
+    template_name = 'empleados/habilidades.html'
+    context_object_name = 'habilidades'
+    def get_queryset(self):
+        habilidades = Empleado.objects.get(id = 1)
+        return habilidades.habilidades.all() #Retorno todas las habilidades del empleado con id = 1
+
+
 
 
