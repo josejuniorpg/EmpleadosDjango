@@ -10,7 +10,10 @@ class ListAllEmpleados(ListView):
     # paginate_by = 4
     # ordering = 'first_name'
     #context_object_name = 'empleados' #Lo comento porque uso el Objetc_list directamente
-    model = Empleado
+    # model = Empleado
+    queryset = Empleado.objects.filter(
+        departamento__name = 'Nombnre'
+    )
 
 class ListByAreaEmpleado(ListView):
     """ Lista empleados de un area """
@@ -23,4 +26,21 @@ class ListByAreaEmpleado(ListView):
             departamento__name = area #Busco el atributo name del modelo departamento
         )
         return lista #el meotodo siempre debe retornar una lista.
+
+class ListEmpleadosByKword(ListView):
+    """Listar empleados por trabjajo"""
+    template_name = 'empleados/by_kword.html'
+    context_object_name = 'empleados'
+    model = Empleado
+
+    def get_queryset(self):
+        #print('**********')
+        palabra_clave = self.request.GET.get('kword', '') #Recibo parametro de Url, oh solicitudes que se mandar el servidor.
+        #print('palabra_clave: ', palabra_clave)
+        lista = Empleado.objects.filter( #Filtro lo que recibo en la Url.
+            first_name = palabra_clave
+        )
+        #print('lista: ', lista)
+        return lista
+
 

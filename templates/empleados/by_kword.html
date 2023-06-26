@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Por trabahjo</h1>
+<form method="GET"> {% csrf_token %}
+    <label for="kword">Nombre:</label>
+    <input type="text" id="kword" name="kword" placeholder="Ingrese Nombre">
+    <input type="submit" value="enviar">
+</form>
+<h1>Lista resultados</h1>
+{{ empleados }}
+<ul>
+    {% for i in empleados %}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
