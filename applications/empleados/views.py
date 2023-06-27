@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 #Models
 from .models import Empleado
 
@@ -50,6 +51,68 @@ class ListHabilidadesEmpleado(ListView):
     def get_queryset(self):
         habilidades = Empleado.objects.get(id = 1)
         return habilidades.habilidades.all() #Retorno todas las habilidades del empleado con id = 1
+
+    #Detail View
+
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    template_name = 'empleados/detail_empleado.html'
+    context_object_name = 'empleados'
+
+    def get_context_data(self, **kwargs):
+        context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
+        context['titulo'] = 'Empleado del mes'
+        return context
+
+
+class EmpleadoCreateView(CreateView):
+    model = Empleado
+    template_name = 'empleados/add.html'
+    fields = [ #Este campo es obligatorio.
+        'first_name', #Son campos de mi modelo.
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+    ]
+    #success_url = '.' #Redirecciona a la misma pagina
+    #success_url = '/' #Redirecciona al home
+    #success_url = '/success/' #Redirecciona a la pagina de exito
+    success_url = reverse_lazy('empleado_app:success')
+    def form_valid(self, form): #Valida el formulario, y guardo en la BD.
+        #Logica del proceso
+        empleado = form.save(commit = False)
+        empleado.full_name = empleado.first_name + ' ' + empleado.last_name #Concateno el nombre y apellido, y lo manndo al atribtuo
+        print('Este es el empleado',empleado)
+        empleado.save() #Guardo en la BD.
+        return super().form_valid(form)
+
+
+class SuccessView(TemplateView):
+    template_name = 'empleados/success.html'
+
+
+class EmpleadoUpdateView(UpdateView):
+    template_name = 'empleados/update.html'
+    model = Empleado
+    fields = [ #Este campo es obligatorio.
+        'first_name', #Son campos de mi modelo.
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+    ]
+    success_url = reverse_lazy('empleado_app:success')
+    def post(self, request, *args, **kwargs):
+        #Metodo para ver que se envia en el formulario
+        self.object = self.get_object()# Obtengo el objeto que se va a actualizar, Pero lo puedo quitar
+        print('********** METODO POST **********')
+        print('POST: ', request.POST)
+        print('POST: ', request.POST['last_name']) #Accedo a un campo en el request.
+        print('FILES: ', request.FILES)
+        return super().post(request, *args, **kwargs)
+
+
 
 
 
