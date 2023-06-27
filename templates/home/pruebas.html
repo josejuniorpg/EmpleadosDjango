@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
 <body>
-
 <h1>Pruebas</h1>
 
-{{ listaPrueba }}
+<form method="post">{% csrf_token %}
+{{ form }}
+    <button type="submit">Mandar</button>
+</form>
 
 </body>
 </html>
