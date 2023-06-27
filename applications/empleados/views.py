@@ -113,7 +113,10 @@ class EmpleadoUpdateView(UpdateView):
         return super().post(request, *args, **kwargs)
 
 
-
-
+class EmpleadoDeleteView(DeleteView):
+    template_name = 'empleados/delete.html'
+    model = Empleado
+    success_url = reverse_lazy('empleado_app:success')
+    context_object_name = 'empleados'
 
 
