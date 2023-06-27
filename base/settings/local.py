@@ -37,6 +37,6 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')] # Para que django busque los archivos estaticos en la carpeta static
-print('lA RUTA',STATIC_ROOT)
+#todo Ver que en linux y Mac no de error de rutas al cargar static
+STATICFILES_DIRS = [(BASE_DIR/'static')]
+print('lA RUTA',STATICFILES_DIRS)
