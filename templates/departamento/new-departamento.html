@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Nuevo Departamento</h1>
+
+<form method="post"> {% csrf_token %}
+    <h1>Datos Empresa</h1>
+    <p>Nombre {{ form.name }}</p>
+    <p>Corto {{ form.short_name }}</p>
+    <h1>Datos Empleado</h1>
+    <p >Nombre {{ form.first_name }}</p>
+    <p> Apellido {{ form.last_name }}</p>
+    <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>

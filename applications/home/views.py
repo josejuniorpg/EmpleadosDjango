@@ -23,3 +23,4 @@ class PruebaCreateView(CreateView):
     #fields = ('__all__')
     success_url = reverse_lazy('empleado_app:success')
     form_class = PruebaForm
+
