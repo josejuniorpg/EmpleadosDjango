@@ -1,5 +1,9 @@
 # SECURITY WARNING: don't run with debug turned on in production!
+import os.path
+#from django.conf import settings
+
 from .base import *
+from io import FileIO
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -32,4 +36,7 @@ DATABASES = {
     }
 }
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')] # Para que django busque los archivos estaticos en la carpeta static
+print('lA RUTA',STATIC_ROOT)
