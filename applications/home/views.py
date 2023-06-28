@@ -24,3 +24,9 @@ class PruebaCreateView(CreateView):
     success_url = reverse_lazy('empleado_app:success')
     form_class = PruebaForm
 
+class ResumenFoundationView(TemplateView):
+    template_name = 'home/resumen_foundation.html'
+
+
+class HerenciaTemplate(TemplateView):
+    template_name = 'home/home1.html'

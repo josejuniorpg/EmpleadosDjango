@@ -1,9 +1,7 @@
 # SECURITY WARNING: don't run with debug turned on in production!
 import os.path
 #from django.conf import settings
-
 from .base import *
-from io import FileIO
 
 DEBUG = True
 ALLOWED_HOSTS = []
