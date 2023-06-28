@@ -119,4 +119,8 @@ class EmpleadoDeleteView(DeleteView):
     success_url = reverse_lazy('empleado_app:success')
     context_object_name = 'empleados'
 
+class InicioView(TemplateView):
+    """ Vista que carga la pagina de inicio"""
+    template_name = 'inicio.html'
+
 
