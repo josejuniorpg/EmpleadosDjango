@@ -36,7 +36,7 @@ DATABASES = {
     }
 }
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/static/'
 #todo Ver que en linux y Mac no de error de rutas al cargar static
 STATICFILES_DIRS = [(BASE_DIR/'static')]
 # print('lA RUTA',STATICFILES_DIRS)
