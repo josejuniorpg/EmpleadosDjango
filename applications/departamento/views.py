@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import (FormView)
-from django.views.generic import (TemplateView)
+from django.views.generic import (TemplateView, ListView, UpdateView, DeleteView)
 from .forms import (NewDepartamento)
 from django.urls import reverse_lazy
 
@@ -9,7 +9,6 @@ from ..empleados.models import Empleado
 
 
 # Create your views here.
-
 
 class NewDepartamentoView(FormView):
     template_name = 'departamento/new-departamento.html'
@@ -29,5 +28,28 @@ class NewDepartamentoView(FormView):
             )
         )
         return super(NewDepartamentoView, self).form_valid(form)
+
+
+class DepartamentoListView(ListView):
+    template_name = "departamento/lista.html"
+    model = Departamento
+
+
+class DepartamentoUpdateView(UpdateView):
+    template_name = 'departamento/detail.html'
+    model = Departamento
+    fields = [ #Este campo es obligatorio.
+        'name', #Son campos de mi modelo.
+        'short_name',
+        'anulate',
+    ]
+    success_url = reverse_lazy('empleado_app:success')
+    context_object_name = 'departamento' #Es el nombre que se le da al objeto en el template.
+
+class DepartamentoDeleteView(DeleteView):
+    template_name = 'departamento/delete.html'
+    model = Departamento
+    context_object_name = 'departamento'
+    success_url = reverse_lazy('empleado_app:success')
 
 

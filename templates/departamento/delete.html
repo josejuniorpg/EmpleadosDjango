@@ -1,0 +1,13 @@
+{% extends 'includes/base.html' %}
+{% block tiitle %}
+    EliminarEmpleado
+{% endblock  %}
+{% block content %}
+    {% include 'includes/header.html' %}
+    <h1>Borrar Departamento</h1>
+    <form method="post"> {% csrf_token %}
+    <p>Borrar Departamento: {{ departamento }}</p>
+    <input type="submit" value="Borrar">
+</form>
+    </form>
+{% endblock  %}

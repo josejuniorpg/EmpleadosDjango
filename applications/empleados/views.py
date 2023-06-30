@@ -105,7 +105,7 @@ class EmpleadoUpdateView(UpdateView):
         'departamento',
         'habilidades',
     ]
-    success_url = reverse_lazy('empleado_app:success')
+    success_url = reverse_lazy('empleado_app:empleados_all')
     def post(self, request, *args, **kwargs):
         #Metodo para ver que se envia en el formulario
         self.object = self.get_object()# Obtengo el objeto que se va a actualizar, Pero lo puedo quitar

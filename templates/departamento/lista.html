@@ -1,0 +1,41 @@
+{% extends 'includes/base.html' %}
+{% block tittle %}
+    Departamentos
+{% endblock tittle %}
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Departamento de la empleza</h1>
+            <div class="cell">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Nombre corto</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for departemento in object_list %}
+                        <tr>
+                            <td>{{ departemento.name }}</td>
+                            <td>{{ departemento.short_name }}</td>
+                            <td>{{ departemento.anulate }}</td>
+                            <td>
+                                <a href="{% url 'departamento_app:update' departemento.id %}"
+                                   class="button warning">Editar</a>
+                                <a href="{% url 'departamento_app:delete' departemento.id %}"
+                                   class="button alert">Eliminar</a>
+                                <a href="{% url 'empleado_app:empleados_area' departemento.name %}"
+                                   class="button">VerEmpleados</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
