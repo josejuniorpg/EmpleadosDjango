@@ -1,0 +1,15 @@
+{% extends 'includes/base.html' %}
+{% block title %}Lista de Empleados{% endblock %}
+{% block content %}
+<h1>Lista de Todos los empleados</h1>
+<form method="get">
+    <label for="page">Pagina </label>
+    <input type="text" name="page" id="page">
+    <input type="submit" value="Buscar">
+</form>
+<ul>
+    {% for empleado in object_list %}
+        <li>{{ empleado.first_name }} {{ empleado.last_name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,23 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Lista de Todos los empleados</h1>
-<form method="get">
-    <label for="page">Pagina </label>
-    <input type="text" name="page" id="page">
-    <input type="submit" value="Buscar">
-</form>
+{% extends 'includes/base.html' %}
+{% block title %}Lista de Empleados{% endblock %}
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Lista empleados</h1>
+            <form class="cell grid-x grid-margin-x" method="get"> {% csrf_token %}
+                <div class="cell large-7">
+                    <input type="text" id="search" name="kword" placeholder="Buscar Empleado">
+                </div>
+                <div class="cell large-7">
+                    <button class="submit success button">Bucar</button>
+                </div>
+            </form>
+            <div class="cell">
+                <table>
+                    <thead>
+                    <tr>
+                        <th width="200">ID</th>
+                        <th>Nombres</th>
+                        <th width="150">Apellidos</th>
+                        <th width="150">Departamento</th>
+                        <th width="150">Accion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for empleado in object_list %}
+                        <tr>
+                            <td>{{ empleado.id }}</td>
+                            <td>{{ empleado.first_name }}</td>
+                            <td>{{ empleado.last_name }}</td>
+                            <td>{{ empleado.departamento }}</td>
+                            <td>
+                                <a href="{% url 'empleado_app:update' empleado.id %}" class="button warning">Editar</a>
+                                <a href="{% url 'empleado_app:delete' empleado.id %}" class="button alert">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="cell">
 
-<ul>
-    {% for empleado in object_list %}
-    <li>{{ empleado.first_name }} {{ empleado.last_name }}</li>
-    {% endfor %}
-</ul>
-
-
-</body>
-</html>
+                {% if is_paginated %} {# Validacion extra #}
+                    <nav aria-label="Pagination">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="pagination-previous"><a href="?page={{ page_obj.previous_page_number }}">Atras</a>
+                                </li>
+                            {% endif %}
+                            {% for pagina in paginator.page_range %}
+                                {% if pagina == page_obj.number  %}
+                                    <li class="current"><a href="?page={{ pagina }}" aria-label="Page 2">{{ pagina }}</a></li>
+                                {% else %}
+                                    <li><a href="?page={{ pagina }}" aria-label="Page 1">{{ pagina }}</a></li>
+                                {% endif%}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

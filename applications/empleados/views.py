@@ -8,13 +8,16 @@ from .models import Empleado
 
 class ListAllEmpleados(ListView):
     template_name = 'empleados/list_all.html'
-    paginate_by = 1 #Solo mostrara 4 regitros
+    paginate_by = 4 #Numero de registros por pagina
     # ordering = 'first_name' #Ordena por nombre alfabeticamnete
     #context_object_name = 'empleados' #Lo comento porque uso el Objetc_list directamente
-    # model = Empleado
-    queryset = Empleado.objects.filter(
-        departamento__name = 'Nombnre'
-    )
+    #model = Empleado
+    def get_queryset(self):
+        palabra_clave = self.request.GET.get('kword', '') #Recibo parametro de Url, oh solicitudes que se mandar el servidor.
+        lista = Empleado.objects.filter( #Filtro lo que recibo en la Url.
+            full_name__icontains = palabra_clave
+        )
+        return lista
 
 class ListByAreaEmpleado(ListView):
     """ Lista empleados de un area """
