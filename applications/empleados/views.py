@@ -15,7 +15,7 @@ class ListAllEmpleados(ListView):
     def get_queryset(self):
         palabra_clave = self.request.GET.get('kword', '') #Recibo parametro de Url, oh solicitudes que se mandar el servidor.
         lista = Empleado.objects.filter( #Filtro lo que recibo en la Url.
-            full_name__icontains = palabra_clave
+            full_name__icontains =  palabra_clave
         )
         return lista
 
@@ -77,11 +77,12 @@ class EmpleadoCreateView(CreateView):
         'job',
         'departamento',
         'habilidades',
+        'avatar',
     ]
     #success_url = '.' #Redirecciona a la misma pagina
     #success_url = '/' #Redirecciona al home
     #success_url = '/success/' #Redirecciona a la pagina de exito
-    success_url = reverse_lazy('empleado_app:success')
+    success_url = reverse_lazy('empleado_app:empleados_all') #Redirecciona a la pagina de exito
     def form_valid(self, form): #Valida el formulario, y guardo en la BD.
         #Logica del proceso
         empleado = form.save(commit = False)
@@ -119,7 +120,7 @@ class EmpleadoUpdateView(UpdateView):
 class EmpleadoDeleteView(DeleteView):
     template_name = 'empleados/delete.html'
     model = Empleado
-    success_url = reverse_lazy('empleado_app:success')
+    success_url = reverse_lazy('empleado_app:empleados_all')
     context_object_name = 'empleados'
 
 class InicioView(TemplateView):
