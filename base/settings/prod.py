@@ -24,6 +24,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [(BASE_DIR/'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+STATIC_ROOT = os.path.join(BASE_DIR/'staticfiles')
 # print('lA RUTA',BASE_DIR)
 # print('STATICS',STATICFILES_DIRS)
 # print('STATICS_URL',STATIC_URL)
