@@ -3,8 +3,8 @@ import os.path
 #from django.conf import settings
 from .base import *
 
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {

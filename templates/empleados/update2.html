@@ -1,0 +1,43 @@
+{% extends 'includes/base.html' %}
+{% block tittle %}
+{% endblock %}
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell">
+                <h1>Modificar Usuario</h1>
+            </div>
+            <div class="cell">
+                <form class="grid-x grid-margin-x" method="post"> {% csrf_token %}
+                    <div class="medium-6 cell">
+                        <label>Nombres
+                            {{ form.first_name }}
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Apellido
+                            {{ form.last_name }}
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Trabajo
+                            {{ form.job }}
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Departamento
+                            {{ form.departamento }}
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>Habilidades
+                            {{ form.habilidades }}
+                        </label>
+                    </div>
+                    <button type="submit" class="button success"> Modificar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

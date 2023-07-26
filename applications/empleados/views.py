@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
+from .forms import EmpleadoForm
 #Models
 from .models import Empleado
 
@@ -83,13 +85,14 @@ class EmpleadoCreateView(CreateView):
     #success_url = '/' #Redirecciona al home
     #success_url = '/success/' #Redirecciona a la pagina de exito
     success_url = reverse_lazy('empleado_app:empleados_all') #Redirecciona a la pagina de exito
+
     def form_valid(self, form): #Valida el formulario, y guardo en la BD.
         #Logica del proceso
         empleado = form.save(commit = False)
         empleado.full_name = empleado.first_name + ' ' + empleado.last_name #Concateno el nombre y apellido, y lo manndo al atribtuo
         print('Este es el empleado',empleado)
         empleado.save() #Guardo en la BD.
-        return super().form_valid(form)
+        return super().form_valid(form) #Aqui  hago lo mismo que los otros super. Solo que sin llamara la clase.
 
 
 class SuccessView(TemplateView):
@@ -107,6 +110,21 @@ class EmpleadoUpdateView(UpdateView):
         'habilidades',
     ]
     success_url = reverse_lazy('empleado_app:empleados_all')
+    def post(self, request, *args, **kwargs):
+        #Metodo para ver que se envia en el formulario
+        self.object = self.get_object()# Obtengo el objeto que se va a actualizar, Pero lo puedo quitar
+        print('********** METODO POST **********')
+        print('POST: ', request.POST)
+        print('POST: ', request.POST['last_name']) #Accedo a un campo en el request.
+        print('FILES: ', request.FILES)
+        return super().post(request, *args, **kwargs)
+
+
+class EmpleadoUpdateView2(UpdateView):
+    template_name = 'empleados/update2.html'
+    model = Empleado
+    success_url = reverse_lazy('empleado_app:empleados_all')
+    form_class = EmpleadoForm
     def post(self, request, *args, **kwargs):
         #Metodo para ver que se envia en el formulario
         self.object = self.get_object()# Obtengo el objeto que se va a actualizar, Pero lo puedo quitar
