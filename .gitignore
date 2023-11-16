@@ -1,3 +1,4 @@
 /static/img/
 /manage.py
 /staticfiles/
+./db.sqlite3
